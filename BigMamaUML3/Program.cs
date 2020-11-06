@@ -6,7 +6,9 @@ namespace BigMamaUML3
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            MenuCatalog c = new MenuCatalog();
+
+
         }
     }
 }
