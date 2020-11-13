@@ -20,8 +20,10 @@ namespace BigMamaUML3
                 _menu.Add(aMenuItems);
             else
             {
-                Console.WriteLine("Error: Item already exists");
+                MenuItemNumberExist mex = new MenuItemNumberExist("Menu error: It is not possible to add an item that already exists!");
+                throw mex;
             }
+            
         }
 
         public IMenuItem Search(int number)
@@ -49,9 +51,7 @@ namespace BigMamaUML3
         {
             IMenuItem m = Search(number);
             if (m != null)
-                _menu.Remove(m);
-            else
-                Console.WriteLine("Error: Item does not exist");
+                    _menu.Remove(m);
         }
 
         public void PrintPizzasMenu()
@@ -143,18 +143,24 @@ namespace BigMamaUML3
 
         public IMenuItem MostExpensiveMenuItem()
         {
-            double price = 0;
-            string name = "";
+            IMenuItem max = new MenuItem(0, "", "", -1, MenuType.Pizza, false, false);
             foreach (IMenuItem m in _menu)
             {
-                if (m.Price > price)
+                if (m.Price > max.Price)
                 {
-                    price = m.Price;
-                    name = m.Name;
+                    max = m;
                 }
             }
-            Console.WriteLine($"The most expensive item is {name} with a price of {price} DKK.");
-            return null;
+            // Redundant else statement??? HELP
+            if (max.Price > -1)
+            {
+                return max;
+            }
+            else
+            {
+                return null;
+
+            }
         }
     }
 }
